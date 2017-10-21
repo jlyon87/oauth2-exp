@@ -13,9 +13,7 @@ module.exports = function(app) {
 	app.get("/auth", function(req, res) {
 		console.log("GET we back from login");
 
-		console.log("req.url", req.url);
-		console.log("req.originalUrl", req.originalUrl);
-		console.log("req.query", req.query);
+		esiApi.retrieveAuthCode(req);
 
 		res.redirect("/");
 	});
