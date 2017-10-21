@@ -38,12 +38,12 @@ const redirectToSSO = (res) => {
 };
 
 const requestAccessToken = (authCode) => {
-
+	const authHeader = getAuthorizationHeader();
 	return axios({
 		method: "POST",
 		url: TOKEN_URL,
 		headers: {
-			"Authorization": getAuthorizationHeader,
+			"Authorization": authHeader,
 			"Content-Type": "application/x-www-form-urlencoded",
 			"Host": "login.eveonline.com",
 			"grant_type": "authorization_code",
