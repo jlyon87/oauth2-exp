@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/jlyon87/oauth2-exp#readme",
   "dependencies": {
+    "axios": "^0.17.0",
     "express": "^4.16.2",
     "request": "^2.83.0"
   }
