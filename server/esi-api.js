@@ -43,11 +43,11 @@ const requestAccessToken = (authCode) => {
 		method: "POST",
 		url: TOKEN_URL,
 		headers: {
-			Authorization: getAuthorizationHeader,
-			Content-Type: "application/x-www-form-urlencoded",
-			Host: "login.eveonline.com",
-			grant_type: "authorization_code",
-			code: authCode
+			"Authorization": getAuthorizationHeader,
+			"Content-Type": "application/x-www-form-urlencoded",
+			"Host": "login.eveonline.com",
+			"grant_type": "authorization_code",
+			"code": authCode
 		},
 		data: {}
 	});
