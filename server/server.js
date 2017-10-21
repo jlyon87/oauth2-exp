@@ -12,8 +12,6 @@ app.use("/public", express.static(path.join(__dirname, "..", "public")));
 require("./routes/html-routes.js")(app);
 require("./routes/auth-routes.js")(app);
 
-esiApi.getEsiScopes();
-
 app.listen(PORT, function() {
 	console.log("App listening on port: ", PORT);
 });
