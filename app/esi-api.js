@@ -15,7 +15,7 @@ const getAuthorizationHeader = () => {
 
 const getEsiScopes = () => {
 	return new Promise((resolve, reject) => {
-		fs.readFile("server/esi-scopes.txt", "utf8", (err, data) => {
+		fs.readFile("data/esi-scopes.txt", "utf8", (err, data) => {
 			if(err) reject(err);
 
 			resolve(data.trim().split(" "));

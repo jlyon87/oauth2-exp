@@ -1,7 +1,8 @@
 const path = require("path");
 const request = require("request");
 
-const esiApi = require("../esi-api.js");
+const esiApi = require("../../app/esi-api.js");
+const oauth = require("../../app/auth/oauth.js");
 
 module.exports = function(app) {
 
@@ -16,9 +17,5 @@ module.exports = function(app) {
 		esiApi.retrieveAuthCode(req);
 
 		res.redirect("/");
-	});
-
-	app.post("/auth", function(req, res) {
-		console.log("POST we back from login");
 	});
 };
