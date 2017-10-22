@@ -39,15 +39,17 @@ const redirectToSSO = (res) => {
 
 const requestAccessToken = (authCode) => {
 	const authHeader = getAuthorizationHeader();
+	const params = [
+		"grant_type=authorization_code",
+		"code=" + authCode
+	];
 	return axios({
 		method: "POST",
-		url: TOKEN_URL,
+		url: TOKEN_URL + "?" + params.join("&"),
 		headers: {
 			"Authorization": authHeader,
 			"Content-Type": "application/x-www-form-urlencoded",
-			"Host": "login.eveonline.com",
-			"grant_type": "authorization_code",
-			"code": authCode
+			"Host": "login.eveonline.com"
 		},
 		data: {}
 	});
