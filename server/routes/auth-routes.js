@@ -13,7 +13,7 @@ module.exports = function(app) {
 	app.get("/login", function(req, res) {
 		console.log("GET logging in");
 		esiApi.creds.state = STATE;
-		oath.requestAuthorizationGrant(res, esiApi.creds);
+		oauth.requestAuthorizationGrant(res, esiApi.creds);
 	});
 
 	app.get("/auth", function(req, res) {
@@ -22,7 +22,7 @@ module.exports = function(app) {
 		const authCode = oauth.handleAuthorizationCode(req, STATE);
 
 		if(authCode) {
-			oath.requestAccessToken(authCode).then((response) => {
+			oauth.requestAccessToken(authCode).then((response) => {
 				if(response.status === 200 && response.statusText === "OK") {
 					console.log("response.data", response.data);
 				}
