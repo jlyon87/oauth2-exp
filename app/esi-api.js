@@ -1,16 +1,9 @@
 const fs = require("fs");
-const axios = require("axios");
 
-const LOGIN_URL = "https://login.eveonline.com/oauth/authorize";
-const TOKEN_URL = "https://login.eveonline.com/oauth/token";
 const creds = {
 	clientId: process.env.CLIENT_ID,
 	secretKey: process.env.SECRET_KEY,
 	callbackUrl: process.env.CALLBACK_URL,
-};
-
-const getAuthorizationHeader = () => {
-	return "Basic " + new Buffer(creds.clientId + ":" + creds.secretKey).toString("base64");
 };
 
 const getEsiScopes = () => {
@@ -23,47 +16,17 @@ const getEsiScopes = () => {
 	});
 };
 
-const redirectToSSO = (res) => {
-	getEsiScopes().then((scopes) => {
-		const params = [
-			"response_type=code",
-			"redirect_uri=" + creds.callbackUrl,
-			"client_id=" + creds.clientId,
-			"scope=" + scopes.join("%20"),
-			"state=boogers"
-		];
+const init = () => {
 
-		res.redirect(LOGIN_URL + "?" + params.join("&"));
-	});
-};
+		getEsiScopes().then((scopes) => {
+			if(scopes) resolve(creds.scopes = scopes);
 
-const requestAccessToken = (authCode) => {
-	const authHeader = getAuthorizationHeader();
-	const params = [
-		"grant_type=authorization_code",
-		"code=" + authCode
-	];
-	return axios({
-		method: "POST",
-		url: TOKEN_URL + "?" + params.join("&"),
-		headers: {
-			"Authorization": authHeader,
-			"Content-Type": "application/x-www-form-urlencoded",
-			"Host": "login.eveonline.com"
-		},
-		data: {}
-	});
-};
-
-const retrieveAuthCode = (req) => {
-	if(req.query.state === "boogers") {
-		requestAccessToken(req.query.code).then((data) => {
-			console.log("data", data);
+			reject(new Error("Error retrieving scopes"));
 		});
-	}
+	});
 };
 
 module.exports = {
-	redirectToSSO: redirectToSSO,
-	retrieveAuthCode: retrieveAuthCode
+	creds: creds,
+	init: init
 };
