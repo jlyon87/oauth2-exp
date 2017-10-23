@@ -22,7 +22,7 @@ module.exports = function(app) {
 		const authCode = oauth.handleAuthorizationCode(req, STATE);
 
 		if(authCode) {
-			oauth.requestAccessToken(authCode).then((response) => {
+			oauth.requestAccessToken(esiApi.creds, authCode).then((response) => {
 				if(response.status === 200 && response.statusText === "OK") {
 					console.log("response.data", response.data);
 				}

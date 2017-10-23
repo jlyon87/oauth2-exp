@@ -26,8 +26,8 @@ const handleAuthorizationCode = (req, state) => {
 	throw new Error("Possible XSRF. Invalid state");
 };
 
-const requestAccessToken = (authCode) => {
-	const authHeader = buildAuthorizationHeader();
+const requestAccessToken = (creds, authCode) => {
+	const authHeader = buildAuthorizationHeader(creds.clientId, creds.secretKey);
 	const params = [
 		"grant_type=authorization_code",
 		"code=" + authCode
