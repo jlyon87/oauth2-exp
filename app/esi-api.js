@@ -17,7 +17,7 @@ const getEsiScopes = () => {
 };
 
 const init = () => {
-
+	return new Promise((resolve, reject) => {
 		getEsiScopes().then((scopes) => {
 			if(scopes) resolve(creds.scopes = scopes);
 
