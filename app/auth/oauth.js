@@ -16,7 +16,7 @@ const requestAuthorizationGrant = (res, creds) => {
 		"state=" + creds.state
 	];
 
-	res.redirect(LOGIN_URL + "?" + params.join("&"));
+	res.redirect(AUTHORIZATION_ENDPOINT + "?" + params.join("&"));
 };
 
 const handleAuthorizationCode = (req, state) => {
