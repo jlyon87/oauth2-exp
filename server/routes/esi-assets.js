@@ -11,18 +11,12 @@ const getAuthHeader = esi => {
 };
 
 const handleAssets = res => {
-	console.log("assets res.data", res.data);
-	if (res.status === 200) {
-		res.status(200).send(res.data);
-	} else {
-		res.status(404).send();
-		throw new Error("Error retrieving assets.");
-	}
+
 };
 
 const getAssets = (req, res) => {
 	//		esiChar.get("/characters/" + 92985127)
-	console.log("getting character", req.sessionID);
+	console.log("getting assets", req.sessionID);
 	console.log("req.session.esi", req.session.esi);
 	console.log("req.session.character", req.session.character);
 
@@ -34,7 +28,15 @@ const getAssets = (req, res) => {
 			"Authorization": authHeader
 		}
 	})
-	.then(handleAssets)
+	.then(esiRes => {
+		console.log("assets res.data", esiRes.data);
+		if (res.status === 200) {
+			res.status(200).send(esiRes.data);
+		} else {
+			res.status(404).send();
+			throw new Error("Error retrieving assets.");
+		}
+	})
 	.catch(err => console.error(err));
 };
 
