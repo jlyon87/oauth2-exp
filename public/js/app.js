@@ -41,7 +41,7 @@ var App = (function App(App) {
 	var drawAssets = function(assets) {
 		var assetsDiv = document.getElementById("assets");
 		assetsDiv.innerHTML = "";
-		assetsDiv.textContent = JSON.stringify(assets, null, 2);
+//		assetsDiv.textContent = JSON.stringify(assets, null, 2);
 
 		var table = document.createElement("table");
 		var thead = document.createElement("thead");
@@ -84,6 +84,7 @@ var App = (function App(App) {
 
 		table.appendChild(thead);
 		table.appendChild(tbody);
+		assetsDiv.appendChild(table);
 	};
 
 	var getPublicData = function() {
