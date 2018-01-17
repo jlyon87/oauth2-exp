@@ -48,8 +48,21 @@ const requestAccessToken = (creds, authCode) => {
 	});
 };
 
+const getCharacterData = (oath) => {
+	return esiInstance({
+		method: "GET",
+		url: "/verify",
+		headers: {
+			"User-Agent": "companion",
+			"Authorization": "Bearer " + oath.access_token,
+			"Host": "login.eveonline.com"
+		}
+	});
+};
+
 module.exports = {
 	requestAuthorizationGrant,
 	handleAuthorizationCode,
 	requestAccessToken,
+	getCharacterData
 };
