@@ -20,11 +20,71 @@ var App = (function App(App) {
 		characterDiv.appendChild(cname);
 	};
 
+	var drawAssetRow = function(asset) {
+		var assetRow = document.createElement("tr");
+
+		var rowHeader = document.createElement("th");
+		rowHeader.textContent = asset.type_id;
+		assetRow.appendChild(rowHeader);
+
+		for(var key in asset) {
+			if(asset.hasOwnProperty(key) && key !== "type_id") {
+				var cell = document.createElement("td");
+				cell.textContent = asset[key];
+				assetRow.appendChild(cell);
+			}
+		}
+
+		return assetRow;
+	};
+
 	var drawAssets = function(assets) {
 		var assetsDiv = document.getElementById("assets");
 		assetsDiv.innerHTML = "";
 		assetsDiv.textContent = JSON.stringify(assets, null, 2);
-	}
+
+		var table = document.createElement("table");
+		var thead = document.createElement("thead");
+		var theadtr = document.createElement("tr");
+
+		var typeClm = document.createElement("th");
+		typeClm.textContent = "type_id";
+		theadtr.appendChild(typeClm);
+
+		var qtyClm = document.createElement("td");
+		qtyClm.textContent = "quantity";
+		theadtr.appendChild(qtyClm);
+
+		var locIdClm = document.createElement("td");
+		locIdClm.textContent = "location_id";
+		theadtr.appendChild(locIdClm);
+
+		var locTypeClm = document.createElement("td");
+		locTypeClm.textContent = "location_type";
+		theadtr.appendChild(locTypeClm);
+
+		var itemIdClm = document.createElement("td");
+		itemIdClm.textContent = "item_id";
+		theadtr.appendChild(itemIdClm);
+
+		var locFlagClm = document.createElement("td");
+		locFlagClm.textContent = "location_flag";
+		theadtr.appendChild(locFlagClm);
+
+		var isSingleClm = document.createElement("td");
+		isSingleClm.textContent = "is_singleton";
+		theadtr.appendChild(isSingleClm);
+		thead.appendChild(theadtr);
+
+		var tbody = document.createElement("tbody");
+
+		assets.forEach(function(asset) {
+			tbody.appendChild(drawAssetRow(asset));
+		});
+
+		table.appendChild(thead);
+		table.appendChild(tbody);
+	};
 
 	var getPublicData = function() {
 		var xhttp = createXMLHttpRequest("GET", "/character", function() {
