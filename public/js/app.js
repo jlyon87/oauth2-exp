@@ -41,6 +41,7 @@ var App = (function App(App) {
 			console.log("assets", data);
 			drawAssets(data);
 		});
+		xhttp.send();
 	};
 
 	return {
