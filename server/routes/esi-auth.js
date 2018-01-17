@@ -26,9 +26,9 @@ module.exports = (app, config) => {
 						req.session.esi = user;
 						console.log("req.session.esi written", req.session.esi);
 
-						esiAuth.getCharacterData(esiRes.data)
-
 						return esiRes;
+					} else {
+						throw new Error("Error requesting access token.");
 					}
 				})
 				.then(esiAuth.getCharacterData(esiRes.data))
