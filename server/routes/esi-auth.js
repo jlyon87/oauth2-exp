@@ -6,13 +6,13 @@ const STATE = process.env.STATE || "boogers";
 module.exports = function(app, config) {
 
 	app.get("/login", function(req, res) {
-		console.log("GET logging in", req.sessionID);
+		console.log("GET logging in");
 		config.creds.state = STATE;
 		esiAuth.requestAuthorizationGrant(res, config.creds);
 	});
 
 	app.get("/auth", function(req, res) {
-		console.log("GET we back from login", req.sessionID);
+		console.log("GET we back from login");
 		console.log("req.query", req.query);
 		const authCode = esiAuth.handleAuthorizationCode(req, STATE);
 
@@ -21,7 +21,7 @@ module.exports = function(app, config) {
 				.then((response) => {
 					if(response.status === 200 && response.statusText === "OK") {
 						console.log("response.data", response.data);
-						console.log("req.sessionID", req.sessionID);
+						console.log("Setting session.esi - req.sessionID", req.sessionID);
 						req.session.esi = response.data;
 					}
 				})
