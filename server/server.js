@@ -2,8 +2,6 @@ const path = require("path");
 const express = require("express");
 const request = require("request");
 
-const esiApi = require("../app/esi-api.js");
-
 const app = express();
 const PORT = process.env.PORT || 8080;
 
