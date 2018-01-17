@@ -6,7 +6,7 @@ const session = require("./session");
 const htmlRoutes = require("./html-routes");
 const esiAuth = require("./esi-auth");
 const esiCharacter = require("./esi-character");
-const esiAssets = requrie("./esi-assets");
+const esiAssets = require("./esi-assets");
 
 const router = app => {
 	app.use(bodyParser.json());
