@@ -26,12 +26,12 @@ module.exports = (app, config) => {
 						req.session.esi = user;
 						console.log("req.session.esi written", req.session.esi);
 
-						return esiRes;
+						return esiRes.data;
 					} else {
 						throw new Error("Error requesting access token.");
 					}
 				})
-				.then(esiAuth.getCharacterData(esiRes.data))
+				.then(esiAuth.getCharacterData(data))
 				.then(esiRes => {
 					console.log("getCharacters res.data", esiRes);
 					req.session.character = esiRes.data;
