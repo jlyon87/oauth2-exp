@@ -31,7 +31,7 @@ module.exports = (app, config) => {
 						throw new Error("Error requesting access token.");
 					}
 				})
-				.then(esiAuth.getCharacterData(data))
+				.then(esiAuth.getCharacterData)
 				.then(esiRes => {
 					console.log("getCharacters res.data", esiRes);
 					req.session.character = esiRes.data;
