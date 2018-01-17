@@ -12,7 +12,7 @@ var App = (function App(App) {
 		character.innerHTML = "";
 		var cid = document.createElement("div");
 		var cname = document.createElement("div");
-		cid.textContent = data.name;
+		cid.textContent = data.id;
 		cname.textContent = data.name;
 
 		character.appendChild(cid);
