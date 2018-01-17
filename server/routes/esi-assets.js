@@ -39,8 +39,8 @@ const getAssets = (req, res) => {
 	.catch(err => console.error(err));
 };
 
-const characterRoutes = app => {
+const assetsRoutes = app => {
 	app.get("/assets", getAssets);
 };
 
-module.exports = characterRoutes;
+module.exports = assetsRoutes;
