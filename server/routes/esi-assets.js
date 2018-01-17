@@ -30,7 +30,7 @@ const getAssets = (req, res) => {
 	})
 	.then(esiRes => {
 		console.log("assets res.data", esiRes.data);
-		if (res.status === 200) {
+		if (esiRes.status === 200) {
 			res.status(200).send(esiRes.data);
 		} else {
 			res.status(404).send();
