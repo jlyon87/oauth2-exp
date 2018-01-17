@@ -6,25 +6,18 @@ const STATE = process.env.STATE || "boogers";
 module.exports = (app, config) => {
 
 	app.get("/login", function(req, res) {
-		console.log("GET logging in");
 		config.creds.state = STATE;
 		esiAuth.requestAuthorizationGrant(res, config.creds);
 	});
 
 	app.get("/auth", function(req, res) {
-		console.log("GET we back from login");
-		console.log("req.query", req.query);
 		const authCode = esiAuth.handleAuthorizationCode(req, STATE);
 
 		if(authCode) {
 			esiAuth.requestAccessToken(config.creds, authCode)
 				.then(esiRes => {
 					if(esiRes.status === 200 && esiRes.statusText === "OK") {
-						console.log("response.data", esiRes.data);
-						console.log("Setting session.esi - req.sessionID", req.sessionID);
-						const user = { access_token, token_type, expires_in, refresh_token } = esiRes.data;
-						req.session.esi = user;
-						console.log("req.session.esi written", req.session.esi);
+						req.session.esi = esiRes.data;
 
 						return esiRes.data;
 					} else {
@@ -33,7 +26,6 @@ module.exports = (app, config) => {
 				})
 				.then(esiAuth.getCharacterData)
 				.then(esiRes => {
-					console.log("getCharacters res.data", esiRes);
 					req.session.character = { CharacterID, CharacterName } = esiRes.data;
 					res.redirect("/");
 				})

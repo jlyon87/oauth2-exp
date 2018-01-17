@@ -49,15 +49,13 @@ const requestAccessToken = (creds, authCode) => {
 };
 
 const getCharacterData = oauth => {
-	console.log("getting character data with access token", oauth);
 	const authorizationHeader = oauth.token_type + " " + oauth.access_token;
-	console.log("Authorization", authorizationHeader);
 	return esiInstance({
 		method: "GET",
 		url: "/verify",
 		headers: {
 			"User-Agent": "eve-companion.in",
-			"Authorization": oauth.token_type + " " + oauth.access_token,
+			"Authorization": authorizationHeader,
 			"Host": "login.eveonline.com"
 		}
 	});

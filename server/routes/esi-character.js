@@ -4,12 +4,12 @@ const esiChar = axios.create({
 });
 
 const getPublicData = (req, res) => {
-	console.log("getting character", req.sessionID);
 	//		esiChar.get("/characters/" + 92985127)
+	console.log("getting character", req.sessionID);
 	console.log("req.session.esi", req.session.esi);
-	console.log("req.session", req.session)
-	if (req.session.esi) {
-		res.status(200).send(req.session.esi);
+	console.log("req.session.character", req.session.character);
+	if (req.session.character) {
+		res.status(200).send(req.session.character);
 	} else {
 		res.status(404).send();
 	}
