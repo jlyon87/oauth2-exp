@@ -5,6 +5,7 @@ const esiChar = axios.create({
 
 const characterRoutes = app => {
 	app.get("/character", (req, res) => {
+		console.log("getting character", req.sessionID);
 		//		esiChar.get("/characters/" + 92985127)
 		if(req.session.esi) {
 			console.log("req.session.esi", req.session.esi);

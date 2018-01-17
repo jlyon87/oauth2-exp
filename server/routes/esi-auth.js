@@ -6,7 +6,7 @@ const STATE = process.env.STATE || "boogers";
 module.exports = function(app, config) {
 
 	app.get("/login", function(req, res) {
-		console.log("GET logging in");
+		console.log("GET logging in", req.sessionID);
 		config.creds.state = STATE;
 		esiAuth.requestAuthorizationGrant(res, config.creds);
 	});
