@@ -21,14 +21,14 @@ module.exports = (app, config) => {
 				.then((response) => {
 					if(response.status === 200 && response.statusText === "OK") {
 						console.log("response.data", response.data);
-						console.log("Setting session.esi - req.sessionID", req.sessionID);
-						req.session.esi = response.data;
-						console.log("req.session.esi written", req.session.esi);
+						console.log("Setting session.user - req.sessionID", req.sessionID);
+						const user = { access_token, token_type, expires_in, refresh_token } = response.data;
+						req.session.user = user;
+						console.log("req.session.user written", req.session.user);
+						res.redirect("/");
 					}
 				})
 				.catch(err => console.err);
 		}
-
-		res.redirect("/");
 	});
 };

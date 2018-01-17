@@ -8,7 +8,6 @@ var App = (function App(App) {
 	};
 
 	var getPublicData = function() {
-		console.log("getting");
 		var xhttp = createXMLHttpRequest("GET", "/character", function() {
 			console.log("Success?", this);
 			console.log("responseText?", this.responseText);
@@ -16,7 +15,16 @@ var App = (function App(App) {
 		xhttp.send();
 	}
 
+	var setFakeUser = function() {
+		var xhttp = createXMLHttpRequest("GET", "/fakeUser", function () {
+			console.log("Success?", this);
+			console.log("responseText?", this.responseText);
+		});
+		xhttp.send();
+	};
+
 	return {
-		getPublicData: getPublicData
+		getPublicData: getPublicData,
+		setFakeUser: setFakeUser
 	};
 }(App || {}));
