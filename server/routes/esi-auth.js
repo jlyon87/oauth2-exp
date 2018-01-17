@@ -4,7 +4,10 @@ const request = require("request");
 const esiApi = require("../../app/esi-api.js");
 const oauth = require("../../app/auth/oauth.js");
 
-esiApi.init().then( console.log );
+const esiConfig = require("../esi/esi-config");
+const esiAuth = require("../esi/esi-auth");
+
+esiConfig.init().then( console.log );
 
 const STATE = "boogers";
 

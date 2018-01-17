@@ -1,7 +1,10 @@
 const axios = require("axios");
+const esiInstance = axios.create({
+	baseURL: "https://login.eveonline.com/oauth"
+});
 
-const AUTHORIZATION_ENDPOINT = "https://login.eveonline.com/oauth/authorize";
-const TOKEN_ENDPOINT = "https://login.eveonline.com/oauth/token";
+const AUTHORIZATION_ENDPOINT = "/authorize";
+const TOKEN_ENDPOINT = "/token";
 
 const buildAuthorizationHeader = (clientId, secretKey) => {
 	return "Basic " + new Buffer(clientId + ":" + secretKey).toString("base64");
@@ -16,11 +19,11 @@ const requestAuthorizationGrant = (res, creds) => {
 		"state=" + creds.state
 	];
 
-	res.redirect(AUTHORIZATION_ENDPOINT + "?" + params.join("&"));
+	res.redirect(esiInstance.defaults.baseURL + AUTHORIZATION_ENDPOINT + "?" + params.join("&"));
 };
 
 const handleAuthorizationCode = (req, state) => {
-	if(req.query.state === state) {
+	if (req.query.state === state) {
 		return req.query.code;
 	}
 	throw new Error("Possible XSRF. Invalid state");
@@ -33,7 +36,7 @@ const requestAccessToken = (creds, authCode) => {
 		"code=" + authCode
 	];
 
-	return axios({
+	return esiInstance({
 		method: "POST",
 		url: TOKEN_ENDPOINT + "?" + params.join("&"),
 		headers: {
@@ -46,7 +49,7 @@ const requestAccessToken = (creds, authCode) => {
 };
 
 module.exports = {
-	requestAuthorizationGrant: requestAuthorizationGrant,
-	handleAuthorizationCode: handleAuthorizationCode,
-	requestAccessToken: requestAccessToken,
+	requestAuthorizationGrant,
+	handleAuthorizationCode,
+	requestAccessToken,
 };

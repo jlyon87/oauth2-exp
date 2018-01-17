@@ -8,8 +8,8 @@ const creds = {
 
 const getEsiScopes = () => {
 	return new Promise((resolve, reject) => {
-		fs.readFile("data/esi-scopes.txt", "utf8", (err, data) => {
-			if(err) reject(err);
+		fs.readFile("../../data/esi-scopes.txt", "utf8", (err, data) => {
+			if (err) reject(err);
 
 			resolve(data.trim().split(" "));
 		});
@@ -19,7 +19,7 @@ const getEsiScopes = () => {
 const init = () => {
 	return new Promise((resolve, reject) => {
 		getEsiScopes().then((scopes) => {
-			if(scopes) {
+			if (scopes) {
 				creds.scopes = scopes
 				resolve(scopes);
 			}
