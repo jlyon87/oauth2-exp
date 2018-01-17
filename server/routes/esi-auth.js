@@ -1,16 +1,14 @@
 const esiConfig = require("../esi/esi-config");
 const esiAuth = require("../esi/esi-auth");
 
-esiConfig.init().then( console.log );
+const STATE = process.env.STATE || "boogers";
 
-const STATE = "boogers";
-
-module.exports = function(app) {
+module.exports = function(app, config) {
 
 	app.get("/login", function(req, res) {
 		console.log("GET logging in");
-		esiConfig.creds.state = STATE;
-		esiAuth.requestAuthorizationGrant(res, esiConfig.creds);
+		config.creds.state = STATE;
+		esiAuth.requestAuthorizationGrant(res, config.creds);
 	});
 
 	app.get("/auth", function(req, res) {
@@ -19,11 +17,14 @@ module.exports = function(app) {
 		const authCode = esiAuth.handleAuthorizationCode(req, STATE);
 
 		if(authCode) {
-			esiAuth.requestAccessToken(esiConfig.creds, authCode).then((response) => {
-				if(response.status === 200 && response.statusText === "OK") {
-					console.log("response.data", response.data);
-				}
-			});
+			esiAuth.requestAccessToken(config.creds, authCode)
+				.then((response) => {
+					if(response.status === 200 && response.statusText === "OK") {
+						console.log("response.data", response.data);
+						req.session.esi = response.data;
+					}
+				})
+				.catch(err => console.err);
 		}
 
 		res.redirect("/");
