@@ -23,6 +23,7 @@ module.exports = function(app, config) {
 						console.log("response.data", response.data);
 						console.log("Setting session.esi - req.sessionID", req.sessionID);
 						req.session.esi = response.data;
+						console.log("req.session.esi written", req.session.esi);
 					}
 				})
 				.catch(err => console.err);

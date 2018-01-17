@@ -14,7 +14,10 @@ app.use(session({
 		checkPeriod: 86400000
 	}),
 	resave: true,
-	saveUninitialized: true
+	saveUninitialized: true,
+	cookie: {
+		maxAge: 86400000
+	}
 }));
 
 app.use(bodyParser.json());
