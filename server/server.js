@@ -1,7 +1,6 @@
 const path = require("path");
 const express = require("express");
 const session = require("express-session");
-const MemoryStore = require("memorystore")(session);
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -10,9 +9,6 @@ const PORT = process.env.PORT || 3030;
 app.set("trust proxy", 1);
 app.use(session({
 	secret: process.env.EXPRESS_SESSION_SECRET || "keyboard-cat",
-	store: new MemoryStore({
-		checkPeriod: 86400000
-	}),
 	resave: true,
 	saveUninitialized: true,
 	cookie: {
