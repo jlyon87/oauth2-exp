@@ -9,7 +9,7 @@ var App = (function App(App) {
 
 	var getPublicData = function() {
 		console.log("getting");
-		var xhttp = createXMLHttpRequest("GET", "/public", function() {
+		var xhttp = createXMLHttpRequest("GET", "/character", function() {
 			console.log("Success?", this);
 			console.log("responseText?", this.responseText);
 		});
