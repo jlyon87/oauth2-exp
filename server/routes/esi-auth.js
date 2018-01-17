@@ -26,7 +26,11 @@ module.exports = (app, config) => {
 				})
 				.then(esiAuth.getCharacterData)
 				.then(esiRes => {
-					req.session.character = { CharacterID, CharacterName } = esiRes.data;
+					const character = {
+						id: esiRes.data.CharacterID,
+						name: esiRes.data.CharacterName
+					}
+					req.session.character = character;
 					res.redirect("/");
 				})
 				.catch(err => {

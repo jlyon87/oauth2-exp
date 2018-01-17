@@ -7,9 +7,23 @@ var App = (function App(App) {
 		return xhttp;
 	};
 
+	var drawCharacterData = function(data) {
+		var character = document.getElementById("character");
+		character.innerHTML = "";
+		var cid = document.createElement("div");
+		var cname = document.createElement("div");
+		cid.textContent = data.name;
+		cname.textContent = data.name;
+
+		character.appendChild(cid);
+		character.appendChild(cname);
+	};
+
 	var getPublicData = function() {
 		var xhttp = createXMLHttpRequest("GET", "/character", function() {
-			console.log("responseText?", JSON.parse(this.responseText));
+			var data = JSON.parse(this.responseText);
+			console.log("responseText?", data);
+			drawCharacterData(data);
 		});
 		xhttp.send();
 	}
