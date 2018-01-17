@@ -15,16 +15,7 @@ var App = (function App(App) {
 		xhttp.send();
 	}
 
-	var setFakeUser = function() {
-		var xhttp = createXMLHttpRequest("GET", "/fakeUser", function () {
-			console.log("Success?", this);
-			console.log("responseText?", this.responseText);
-		});
-		xhttp.send();
-	};
-
 	return {
 		getPublicData: getPublicData,
-		setFakeUser: setFakeUser
 	};
 }(App || {}));

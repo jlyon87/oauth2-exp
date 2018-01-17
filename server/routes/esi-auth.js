@@ -18,17 +18,20 @@ module.exports = (app, config) => {
 
 		if(authCode) {
 			esiAuth.requestAccessToken(config.creds, authCode)
-				.then((response) => {
+				.then(response => {
 					if(response.status === 200 && response.statusText === "OK") {
 						console.log("response.data", response.data);
-						console.log("Setting session.user - req.sessionID", req.sessionID);
+						console.log("Setting session.esi - req.sessionID", req.sessionID);
 						const user = { access_token, token_type, expires_in, refresh_token } = response.data;
-						req.session.user = user;
-						console.log("req.session.user written", req.session.user);
+						req.session.esi = user;
+						console.log("req.session.esi written", req.session.esi);
 						res.redirect("/");
 					}
 				})
-				.catch(err => console.err);
+				.catch(err => {
+					console.error(err);
+					res.redirect("/");
+				});
 		}
 	});
 };
