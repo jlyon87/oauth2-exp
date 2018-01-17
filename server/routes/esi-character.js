@@ -7,8 +7,9 @@ const characterRoutes = app => {
 	app.get("/character", (req, res) => {
 		console.log("getting character", req.sessionID);
 		//		esiChar.get("/characters/" + 92985127)
+		console.log("req.session.esi", req.session.esi);
+		console.log("req.session", req.session)
 		if(req.session.esi) {
-			console.log("req.session.esi", req.session.esi);
 			res.status(200).send(req.session.esi);
 		} else {
 			res.status(404).send();
