@@ -7,11 +7,6 @@ const bodyParser = require("body-parser");
 const app = express();
 const PORT = process.env.PORT || 3030;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(express.static("public"));
-
 app.set("trust proxy", 1);
 app.use(session({
 	secret: process.env.EXPRESS_SESSION_SECRET || "keyboard-cat",
@@ -21,6 +16,11 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static("public"));
 
 require("./routes/html-routes.js")(app);
 require("./routes/esi-character")(app);
