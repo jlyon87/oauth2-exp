@@ -12,7 +12,7 @@ const router = app => {
 	app.use(bodyParser.urlencoded({ extended: true }));
 
 	session(app);
-	esiAuth(app);
+	esiCharacter(app);
 
 	esiConfig.init()
 		.then(() => {

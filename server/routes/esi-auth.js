@@ -3,7 +3,7 @@ const esiAuth = require("../esi/esi-auth");
 
 const STATE = process.env.STATE || "boogers";
 
-module.exports = function(app, config) {
+module.exports = (app, config) => {
 
 	app.get("/login", function(req, res) {
 		console.log("GET logging in");
