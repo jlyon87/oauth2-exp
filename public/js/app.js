@@ -9,7 +9,7 @@ var App = (function App(App) {
 
 	var getPublicData = function() {
 		var xhttp = createXMLHttpRequest("GET", "/character", function() {
-			console.log("responseText?", JSON.serialize(this.responseText));
+			console.log("responseText?", JSON.parse(this.responseText));
 		});
 		xhttp.send();
 	}
