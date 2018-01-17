@@ -12,7 +12,7 @@ module.exports = function(app, config) {
 	});
 
 	app.get("/auth", function(req, res) {
-		console.log("GET we back from login");
+		console.log("GET we back from login", req.sessionID);
 		console.log("req.query", req.query);
 		const authCode = esiAuth.handleAuthorizationCode(req, STATE);
 
@@ -21,6 +21,7 @@ module.exports = function(app, config) {
 				.then((response) => {
 					if(response.status === 200 && response.statusText === "OK") {
 						console.log("response.data", response.data);
+						console.log("req.sessionID", req.sessionID);
 						req.session.esi = response.data;
 					}
 				})
