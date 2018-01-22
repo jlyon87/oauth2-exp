@@ -2,7 +2,7 @@ const axios = require("axios");
 const esiChar = axios.create({
 	baseURL: "https://esi.tech.ccp.is/latest/characters",
 	headers: {
-		"User-Agent": "eve-companion.in"
+		"X-User-Agent": "eve-companion.in"
 	}
 });
 
@@ -20,12 +20,12 @@ const getCharacterWallet = (req, res) => {
 		}
 	})
 	.then(esiRes => {
-		console.log("assets res.data", esiRes.data);
+		console.log("wallet res.data", esiRes.data);
 		if (esiRes.status === 200) {
 			res.send(esiRes.data);
 		} else {
 			res.sendStatus(404);
-			throw new Error("Error retrieving assets.");
+			throw new Error("Error retrieving wallet.");
 		}
 	})
 	.catch(err => console.error(err));
@@ -41,12 +41,12 @@ const getCharacterJournal = (req, res) => {
 		}
 	})
 	.then(esiRes => {
-		console.log("assets res.data", esiRes.data);
+		console.log("journal res.data", esiRes.data);
 		if (esiRes.status === 200) {
 			res.send(esiRes.data);
 		} else {
 			res.sendStatus(404);
-			throw new Error("Error retrieving assets.");
+			throw new Error("Error retrieving journal.");
 		}
 	})
 	.catch(err => console.error(err));
@@ -62,12 +62,12 @@ const getCharacterTransactions = (req, res) => {
 		}
 	})
 	.then(esiRes => {
-		console.log("assets res.data", esiRes.data);
+		console.log("transactions res.data", esiRes.data);
 		if (esiRes.status === 200) {
 			res.send(esiRes.data);
 		} else {
 			res.sendStatus(404);
-			throw new Error("Error retrieving assets.");
+			throw new Error("Error retrieving transactions.");
 		}
 	})
 	.catch(err => console.error(err));
