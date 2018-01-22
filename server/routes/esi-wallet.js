@@ -11,10 +11,10 @@ const getAuthHeader = esi => {
 };
 
 const getCharacterWallet = (req, res) => {
-	const assetsUri = "/" + req.session.character.id + "/wallet";
+	const uri = "/" + req.session.character.id + "/wallet";
 	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(assetsUri, {
+	esiChar.get(uri, {
 		headers: {
 			"Authorization": authHeader
 		}
@@ -32,10 +32,10 @@ const getCharacterWallet = (req, res) => {
 };
 
 const getCharacterJournal = (req, res) => {
-	const assetsUri = "/" + req.session.character.id + "/wallet/journal";
+	const uri = "/" + req.session.character.id + "/wallet/journal";
 	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(assetsUri, {
+	esiChar.get(uri, {
 		headers: {
 			"Authorization": authHeader
 		}
@@ -53,10 +53,10 @@ const getCharacterJournal = (req, res) => {
 };
 
 const getCharacterTransactions = (req, res) => {
-	const assetsUri = "/" + req.session.character.id + "/wallet/transactions";
+	const uri = "/" + req.session.character.id + "/wallet/transactions";
 	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(assetsUri, {
+	esiChar.get(uri, {
 		headers: {
 			"Authorization": authHeader
 		}
@@ -73,10 +73,10 @@ const getCharacterTransactions = (req, res) => {
 	.catch(err => console.error(err));
 };
 
-const assetsRoutes = app => {
+const walletRoutes = app => {
 	app.get("/wallet", getCharacterWallet);
 	app.get("/journal", getCharacterJournal);
 	app.get("/transactions", getCharacterTransactions);
 };
 
-module.exports = assetsRoutes;
+module.exports = walletRoutes;
