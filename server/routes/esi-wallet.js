@@ -74,7 +74,6 @@ const getCharacterTransactions = (req, res) => {
 };
 
 const assetsRoutes = app => {
-	app.get("/assets", getAssets);
 	app.get("/wallet", getCharacterWallet);
 	app.get("/journal", getCharacterJournal);
 	app.get("/transactions", getCharacterTransactions);
