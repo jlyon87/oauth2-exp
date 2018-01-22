@@ -9,9 +9,9 @@ const getPublicData = (req, res) => {
 	console.log("req.session.esi", req.session.esi);
 	console.log("req.session.character", req.session.character);
 	if (req.session.character) {
-		res.status(200).send(req.session.character);
+		res.send(req.session.character);
 	} else {
-		res.status(404).send();
+		res.sendStatus(404);
 	}
 };
 

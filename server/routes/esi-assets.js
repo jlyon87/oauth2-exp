@@ -27,9 +27,9 @@ const getAssets = (req, res) => {
 	.then(esiRes => {
 		console.log("assets res.data", esiRes.data);
 		if (esiRes.status === 200) {
-			res.status(200).send(esiRes.data);
+			res.send(esiRes.data);
 		} else {
-			res.status(404).send();
+			res.sendStatus(404);
 			throw new Error("Error retrieving assets.");
 		}
 	})
