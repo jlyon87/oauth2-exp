@@ -41,7 +41,6 @@ var App = (function App(App) {
 	var drawAssets = function(assets) {
 		var assetsDiv = document.getElementById("assets");
 		assetsDiv.innerHTML = "";
-//		assetsDiv.textContent = JSON.stringify(assets, null, 2);
 
 		var table = document.createElement("table");
 		var thead = document.createElement("thead");
@@ -105,9 +104,36 @@ var App = (function App(App) {
 		xhttp.send();
 	};
 
+	var getWallet = function() {
+		var xhttp = createXMLHttpRequest("GET", "/wallet", function () {
+			var data = JSON.parse(this.responseText);
+			console.log("wallet", data);
+		});
+		xhttp.send();
+	};
+
+	var getJournal = function () {
+		var xhttp = createXMLHttpRequest("GET", "/journal", function () {
+			var data = JSON.parse(this.responseText);
+			console.log("journal", data);
+		});
+		xhttp.send();
+	};
+
+	var getTransactions = function () {
+		var xhttp = createXMLHttpRequest("GET", "/transactions", function () {
+			var data = JSON.parse(this.responseText);
+			console.log("transactions", data);
+		});
+		xhttp.send();
+	};
+
 	return {
 		user,
 		getPublicData: getPublicData,
 		getAssets,
+		getWallet,
+		getJournal,
+		getTransactions
 	};
 }(App || {}));

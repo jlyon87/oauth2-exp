@@ -7,6 +7,7 @@ const htmlRoutes = require("./html-routes");
 const esiAuth = require("./esi-auth");
 const esiCharacter = require("./esi-character");
 const esiAssets = require("./esi-assets");
+const esiWallet = require("./esi-wallet");
 
 const router = app => {
 	app.use(bodyParser.json());
@@ -15,6 +16,7 @@ const router = app => {
 	session(app);
 	esiCharacter(app);
 	esiAssets(app);
+	esiWallet(app);
 
 	esiConfig.init()
 		.then(() => {

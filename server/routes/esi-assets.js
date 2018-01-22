@@ -10,10 +10,6 @@ const getAuthHeader = esi => {
 	return esi.token_type + " " + esi.access_token;
 };
 
-const handleAssets = res => {
-
-};
-
 const getAssets = (req, res) => {
 	//		esiChar.get("/characters/" + 92985127)
 	console.log("getting assets", req.sessionID);
