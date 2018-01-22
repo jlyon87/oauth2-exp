@@ -22,7 +22,7 @@ const getCharacterWallet = (req, res) => {
 	.then(esiRes => {
 		console.log("wallet res.data", esiRes.data);
 		if (esiRes.status === 200) {
-			res.send(esiRes.data);
+			res.json(esiRes.data);
 		} else {
 			res.sendStatus(404);
 			throw new Error("Error retrieving wallet.");
@@ -43,7 +43,7 @@ const getCharacterJournal = (req, res) => {
 	.then(esiRes => {
 		console.log("journal res.data", esiRes.data);
 		if (esiRes.status === 200) {
-			res.send(esiRes.data);
+			res.json(esiRes.data);
 		} else {
 			res.sendStatus(404);
 			throw new Error("Error retrieving journal.");
@@ -64,7 +64,7 @@ const getCharacterTransactions = (req, res) => {
 	.then(esiRes => {
 		console.log("transactions res.data", esiRes.data);
 		if (esiRes.status === 200) {
-			res.send(esiRes.data);
+			res.json(esiRes.data);
 		} else {
 			res.sendStatus(404);
 			throw new Error("Error retrieving transactions.");
