@@ -28,7 +28,7 @@ const options = {
 	saveUninitialized: false,
 	name: "esioauth.connect.sid"
 }
-app.use(session(options));
+router.use(session(options));
 
 router.use("/", pageCounter);
 
