@@ -2,6 +2,12 @@ const router = require("express").Router();
 const esiCreds = require("../../esi/esi-config");
 const esiAuth = require("../../esi/esi-auth");
 
+const accessTokenIsValid = (req, res, next) => {
+	if(req.session.esi) {
+		console.log("esi creds", req.session.esi);
+	}
+};
+
 const handleAuth = (req, res) => {
 	const authCode = esiAuth.handleAuthorizationCode(req, esiCreds.state);
 
@@ -36,6 +42,7 @@ const handleLogin = (req, res) => {
 	esiAuth.requestAuthorizationGrant(res, esiCreds);
 };
 
+router.use()
 router.get("/", handleAuth);
 router.get("/login", handleLogin);
 
