@@ -3,6 +3,7 @@ const esiCreds = require("../../esi/esi-config");
 const esiAuth = require("../../esi/esi-auth");
 
 const handleAuth = (req, res) => {
+	console.log("begin handleAuth");
 	const authCode = esiAuth.handleAuthorizationCode(req, esiCreds.state);
 
 	if(authCode) {
@@ -33,6 +34,7 @@ const handleAuth = (req, res) => {
 };
 
 const handleLogin = (req, res) => {
+	console.log("begin handleLogin");
 	esiAuth.requestAuthorizationGrant(res, esiCreds);
 };
 
