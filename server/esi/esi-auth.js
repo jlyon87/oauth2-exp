@@ -12,7 +12,7 @@ const requestAuthorizationGrant = (res, creds) => {
 		"response_type=code",
 		"redirect_uri=" + creds.callbackUrl,
 		"client_id=" + creds.clientId,
-		"scope=" + creds.scopes.join("%20"),
+		"scope=" + creds.scopes.split(" ").join("%20"),
 		"state=" + creds.state
 	];
 
