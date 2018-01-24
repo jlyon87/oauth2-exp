@@ -1,9 +1,11 @@
 const fs = require("fs");
 
 const creds = {
-	clientId: process.env.CLIENT_ID,
-	secretKey: process.env.SECRET_KEY,
-	callbackUrl: process.env.CALLBACK_URL,
+	clientId: process.env.ESI_CLIENT_ID,
+	secretKey: process.env.ESI_SECRET_KEY,
+	callbackUrl: process.env.ESI_CALLBACK_URL,
+	state: process.env.ESI_STATE,
+	scopes: process.env.ESI_SCOPES
 };
 
 const getEsiScopes = () => {
