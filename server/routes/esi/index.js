@@ -11,6 +11,10 @@ const accessTokenIsValid = (req, res, next) => {
 
 		const msRemaining = new Date().getTime() - req.session.esi.expiryTime.getTime();
 		console.log("msRemaining", msRemaining);
+
+		if(msRemaining <= 60000) {
+			console.log("Remaining time low go get a new access token", msRemaining);
+		}
 	}
 	next();
 };
