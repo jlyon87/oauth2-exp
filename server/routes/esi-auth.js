@@ -8,7 +8,7 @@ module.exports = app => {
 	});
 
 	app.get("/auth", function(req, res) {
-		const authCode = esiAuth.handleAuthorizationCode(req, STATE);
+		const authCode = esiAuth.handleAuthorizationCode(req, esiCreds.state);
 
 		if(authCode) {
 			esiAuth.requestAccessToken(esiCreds, authCode)
