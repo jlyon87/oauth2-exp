@@ -26,7 +26,7 @@ module.exports = app => {
 					const character = {
 						id: esiRes.data.CharacterID,
 						name: esiRes.data.CharacterName
-					}
+					};
 					req.session.character = character;
 					res.redirect("/");
 				})
