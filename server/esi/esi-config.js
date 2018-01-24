@@ -31,7 +31,4 @@ const init = () => {
 	});
 };
 
-module.exports = {
-	creds: creds,
-	init: init
-};
+module.exports = creds;

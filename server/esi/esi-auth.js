@@ -3,9 +3,6 @@ const esiInstance = axios.create({
 	baseURL: "https://login.eveonline.com/oauth"
 });
 
-const AUTHORIZATION_ENDPOINT = "/authorize";
-const TOKEN_ENDPOINT = "/token";
-
 const buildAuthorizationHeader = (clientId, secretKey) => {
 	return "Basic " + new Buffer(clientId + ":" + secretKey).toString("base64");
 };
@@ -19,7 +16,7 @@ const requestAuthorizationGrant = (res, creds) => {
 		"state=" + creds.state
 	];
 
-	res.redirect(esiInstance.defaults.baseURL + AUTHORIZATION_ENDPOINT + "?" + params.join("&"));
+	res.redirect(esiInstance.defaults.baseURL + "/authorize?" + params.join("&"));
 };
 
 const handleAuthorizationCode = (req, state) => {
@@ -38,7 +35,7 @@ const requestAccessToken = (creds, authCode) => {
 
 	return esiInstance({
 		method: "POST",
-		url: TOKEN_ENDPOINT + "?" + params.join("&"),
+		url: "/token?" + params.join("&"),
 		headers: {
 			"Authorization": authHeader,
 			"Content-Type": "application/x-www-form-urlencoded",
