@@ -8,10 +8,6 @@ module.exports = app => {
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: true }));
 
-	app.use("*", (req, res, next) => {
-		console.log("originalURL", req.originalURL);
-	});
-
 	sessionRouter(app);
 
 	router.use("/esi", esiRouter);
