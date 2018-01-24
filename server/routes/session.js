@@ -1,4 +1,3 @@
-const router = require("express").Router();
 const session = require("express-session");
 const parseurl = require("parseurl");
 
@@ -28,8 +27,8 @@ const options = {
 	saveUninitialized: false,
 	name: "esioauth.connect.sid"
 }
-router.use(session(options));
 
-router.use("/", pageCounter);
-
-module.exports = router;
+module.exports = app => {
+	app.use(session(options));
+	app.use("/", pageCounter);
+};
