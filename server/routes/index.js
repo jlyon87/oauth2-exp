@@ -10,4 +10,4 @@ module.exports = app => {
 
 	sessionRouter(app);
 	router.use("/esi", esiRouter);
-}
+};
