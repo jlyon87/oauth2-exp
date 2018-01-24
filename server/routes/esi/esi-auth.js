@@ -2,10 +2,9 @@ const router = require("express").Router();
 const esiCreds = require("../../esi/esi-config");
 const esiAuth = require("../../esi/esi-auth");
 
-const getExpiryTime = (secondsFromNow) => {
+const calcExpiryTime = (secondsFromNow) => {
 	return new Date(new Date().getTime() + secondsFromNow * 1000);
 };
-
 
 const handleAuth = (req, res) => {
 	const authCode = esiAuth.handleAuthorizationCode(req, esiCreds.state);
@@ -15,7 +14,7 @@ const handleAuth = (req, res) => {
 			.then(esiRes => {
 				if(esiRes.status === 200 && esiRes.statusText === "OK") {
 					req.session.esi = esiRes.data;
-					req.session.esi.expiryTime = getExpiryTime(esiRes.data.expires_in);
+					req.session.esi.expiryTime = calcExpiryTime(esiRes.data.expires_in);
 					return req.session.esi;
 
 				} else {
