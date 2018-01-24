@@ -12,7 +12,7 @@ const accessTokenIsValid = (req, res, next) => {
 	next();
 };
 
-router.use("/", accessTokenIsValid);
+router.use(accessTokenIsValid);
 
 router.use("/auth", esiAuth);
 router.use("/assets", esiAssets);
