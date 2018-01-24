@@ -113,7 +113,7 @@ var App = (function App(App) {
 	};
 
 	var getJournal = function () {
-		var xhttp = createXMLHttpRequest("GET", "/esi/journal", function () {
+		var xhttp = createXMLHttpRequest("GET", "/esi/wallet/journal", function () {
 			var data = JSON.parse(this.responseText);
 			console.log("journal", data);
 		});
@@ -121,7 +121,7 @@ var App = (function App(App) {
 	};
 
 	var getTransactions = function () {
-		var xhttp = createXMLHttpRequest("GET", "/esi/transactions", function () {
+		var xhttp = createXMLHttpRequest("GET", "/esi/wallet/transactions", function () {
 			var data = JSON.parse(this.responseText);
 			console.log("transactions", data);
 		});
