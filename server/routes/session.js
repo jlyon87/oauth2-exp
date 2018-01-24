@@ -1,3 +1,4 @@
+const router = require("express").Router();
 const session = require("express-session");
 const parseurl = require("parseurl");
 
@@ -18,20 +19,17 @@ const pageCounter = (req, res, next) => {
 	next();
 };
 
-const router = app => {
-	const options = {
-		cookie: {
-			maxAge: ONE_HOUR
-		},
-		secret: SECRET,
-		resave: false,
-		saveUninitialized: false,
-		name: "esioauth.connect.sid"
-	}
+const options = {
+	cookie: {
+		maxAge: ONE_HOUR
+	},
+	secret: SECRET,
+	resave: false,
+	saveUninitialized: false,
+	name: "esioauth.connect.sid"
+}
+app.use(session(options));
 
-	app.use(session(options));
-
-	app.use("/", pageCounter);
-};
+router.use("/", pageCounter);
 
 module.exports = router;

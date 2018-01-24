@@ -87,7 +87,7 @@ var App = (function App(App) {
 	};
 
 	var getPublicData = function() {
-		var xhttp = createXMLHttpRequest("GET", "/character", function() {
+		var xhttp = createXMLHttpRequest("GET", "/esi/character", function() {
 			var data = JSON.parse(this.responseText);
 			console.log("character", data);
 			drawCharacterData(data);
@@ -96,7 +96,7 @@ var App = (function App(App) {
 	}
 
 	var getAssets = function() {
-		var xhttp = createXMLHttpRequest("GET", "/assets", function() {
+		var xhttp = createXMLHttpRequest("GET", "/esi/assets", function() {
 			var data = JSON.parse(this.responseText);
 			console.log("assets", data);
 			drawAssets(data);
@@ -105,7 +105,7 @@ var App = (function App(App) {
 	};
 
 	var getWallet = function() {
-		var xhttp = createXMLHttpRequest("GET", "/wallet", function () {
+		var xhttp = createXMLHttpRequest("GET", "/esi/wallet", function () {
 			var data = JSON.parse(this.responseText);
 			console.log("wallet", data);
 		});
@@ -113,7 +113,7 @@ var App = (function App(App) {
 	};
 
 	var getJournal = function () {
-		var xhttp = createXMLHttpRequest("GET", "/journal", function () {
+		var xhttp = createXMLHttpRequest("GET", "/esi/journal", function () {
 			var data = JSON.parse(this.responseText);
 			console.log("journal", data);
 		});
@@ -121,7 +121,7 @@ var App = (function App(App) {
 	};
 
 	var getTransactions = function () {
-		var xhttp = createXMLHttpRequest("GET", "/transactions", function () {
+		var xhttp = createXMLHttpRequest("GET", "/esi/transactions", function () {
 			var data = JSON.parse(this.responseText);
 			console.log("transactions", data);
 		});
@@ -130,7 +130,7 @@ var App = (function App(App) {
 
 	return {
 		user,
-		getPublicData: getPublicData,
+		getPublicData,
 		getAssets,
 		getWallet,
 		getJournal,

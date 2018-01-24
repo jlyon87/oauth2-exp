@@ -1,3 +1,4 @@
+const router = require("express").Router();
 const axios = require("axios");
 const esiChar = axios.create({
 	baseURL: "https://esi.tech.ccp.is/latest/characters",
@@ -36,8 +37,6 @@ const getAssets = (req, res) => {
 	.catch(err => console.error(err));
 };
 
-const assetsRoutes = app => {
-	app.get("/assets", getAssets);
-};
+router.get("/", getAssets);
 
-module.exports = assetsRoutes;
+module.exports = router;

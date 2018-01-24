@@ -1,21 +1,13 @@
+const router = require("express").Router();
 const bodyParser = require("body-parser");
 
-const session = require("./session");
-const htmlRoutes = require("./html-routes");
-const esiAuth = require("./esi-auth");
-const esiCharacter = require("./esi-character");
-const esiAssets = require("./esi-assets");
-const esiWallet = require("./esi-wallet");
+const sessionRouter = require("./session");
+const esiRouter = require("./esi");
 
-const router = app => {
-	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: true }));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
 
-	session(app);
-	esiAuth(app);
-	esiCharacter(app);
-	esiAssets(app);
-	esiWallet(app);
-};
+router.use("/", sessionRouter);
+router.use("/esi", esiRouter);
 
 module.exports = router;

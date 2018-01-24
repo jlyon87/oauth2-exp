@@ -1,3 +1,4 @@
+const router = require("express").Router();
 const axios = require("axios");
 const esiChar = axios.create({
 	baseURL: "https://esi.tech.ccp.is/latest/characters"
@@ -15,8 +16,6 @@ const getPublicData = (req, res) => {
 	}
 };
 
-const characterRoutes = app => {
-	app.get("/character", getPublicData);
-};
+router.get("/", getPublicData);
 
-module.exports = characterRoutes;
+module.exports = router;
