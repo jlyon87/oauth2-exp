@@ -8,6 +8,9 @@ const esiWallet = require("./esi-wallet");
 const accessTokenIsValid = (req, res, next) => {
 	if(req.session.esi) {
 		console.log("esi creds", req.session.esi);
+
+		const msRemaining = new Date().getTime() - req.session.esi.expiryTime.getTime();
+		console.log("msRemaining", msRemaining);
 	}
 	next();
 };
