@@ -12,9 +12,9 @@ const calcExpiryTime = (secondsFromNow) => {
 
 const accessTokenIsValid = (req, res, next) => {
 	if(req.session.esi) {
-		console.log("esi expiry - type: " + typeof req.session.esi.expiry, req.session.esi.expiry);
+		console.log("esi expiry - type: " + typeof req.session.esi.expiryTime, req.session.esi.expiryTime);
 
-		const msRemaining = new Date(req.session.esi.expiry).getTime() - new Date().getTime();
+		const msRemaining = new Date(req.session.esi.expiryTime).getTime() - new Date().getTime();
 		console.log("msRemaining", msRemaining);
 
 		if(msRemaining <= 60000) {
@@ -25,9 +25,9 @@ const accessTokenIsValid = (req, res, next) => {
 					if(esiRes.status === 200 && esiRes.statusText === "OK") {
 						console.log("Access Token successfully refreshed.");
 						req.session.esi = esiRes.data;
-						const expiry = calcExpiryTime(90);
+						const expiry = calcExpiryTime(esiRes.data.expires_in);
 						console.log("set expiry: " + typeof expiry, expiry);
-						req.session.esi.expiry = expiry;
+						req.session.esi.expiryTime = expiry;
 						return req.session.esi;
 						next();
 					} else {
