@@ -7,9 +7,9 @@ const esiWallet = require("./esi-wallet");
 
 const accessTokenIsValid = (req, res, next) => {
 	if(req.session.esi) {
-		console.log("esi expiryTime - type: " + typeof req.session.esi.expiryTime, req.session.esi.expiryTime);
+		console.log("esi expiry - type: " + typeof req.session.esi.expiry, req.session.esi.expiry);
 
-		const msRemaining = new Date().getTime() - req.session.esi.expiryTime.getTime();
+		const msRemaining = new Date().getTime() - req.session.esi.expiry.getTime();
 		console.log("msRemaining", msRemaining);
 
 		if(msRemaining <= 60000) {

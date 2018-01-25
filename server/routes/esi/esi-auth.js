@@ -14,7 +14,7 @@ const handleAuth = (req, res) => {
 			.then(esiRes => {
 				if(esiRes.status === 200 && esiRes.statusText === "OK") {
 					req.session.esi = esiRes.data;
-					req.session.esi.expiryTime = calcExpiryTime(esiRes.data.expires_in);
+					req.session.esi.expiry = calcExpiryTime(esiRes.data.expires_in);
 					return req.session.esi;
 
 				} else {
