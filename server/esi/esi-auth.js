@@ -63,7 +63,7 @@ const refreshAccess = refreshToken => {
 	const authHeader = buildAuthorizationHeader(creds.clientId, creds.secretKey)
 
 	const params = [
-		"grant_type=refreshToken",
+		"grant_type=refresh_Token",
 		"refresh_token=" + refreshToken
 	];
 
