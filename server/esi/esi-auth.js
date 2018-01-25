@@ -64,7 +64,7 @@ const refreshAccess = refreshToken => {
 
 	const params = [
 		"grant_type=refreshToken",
-		"refresh_token=" refreshToken
+		"refresh_token=" + refreshToken
 	];
 
 	const headers = {
