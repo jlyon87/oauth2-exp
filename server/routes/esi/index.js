@@ -6,6 +6,10 @@ const esiAssets = require("./esi-assets");
 const esiCharacter = require("./esi-character");
 const esiWallet = require("./esi-wallet");
 
+const calcExpiryTime = (secondsFromNow) => {
+	return new Date(new Date().getTime() + secondsFromNow * 1000);
+};
+
 const accessTokenIsValid = (req, res, next) => {
 	if(req.session.esi) {
 		console.log("esi expiry - type: " + typeof req.session.esi.expiry, req.session.esi.expiry);
@@ -21,7 +25,7 @@ const accessTokenIsValid = (req, res, next) => {
 					if(esiRes.status === 200 && esiRes.statusText === "OK") {
 						console.log("Access Token successfully refreshed.");
 						req.session.esi = esiRes.data;
-						const expiry = calcExpiryTime(90000);
+						const expiry = calcExpiryTime(90);
 						console.log("set expiry: " + typeof expiry, expiry);
 						req.session.esi.expiry = expiry;
 						return req.session.esi;
