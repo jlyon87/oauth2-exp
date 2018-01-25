@@ -11,6 +11,13 @@ const calcExpiryTime = (secondsFromNow) => {
 };
 
 const accessTokenIsValid = (req, res, next) => {
+
+	if(true) {
+		console.log("before next");
+		next();
+	}
+	console.log("after next");
+
 	if(req.session.esi) {
 		console.log("esi expiry - type: " + typeof req.session.esi.expiryTime, req.session.esi.expiryTime);
 
@@ -38,9 +45,12 @@ const accessTokenIsValid = (req, res, next) => {
 					console.error(err);
 					next(err);
 				});
+		} else {
+			next();
 		}
+	} else {
+		next();
 	}
-	next();
 };
 
 router.use(accessTokenIsValid);

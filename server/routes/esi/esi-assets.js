@@ -1,25 +1,9 @@
 const router = require("express").Router();
-const axios = require("axios");
-const esiChar = axios.create({
-	baseURL: "https://esi.tech.ccp.is/latest/characters",
-	headers: {
-		"X-User-Agent": "eve-companion.in"
-	}
-});
-
-const getAuthHeader = esi => {
-	return esi.token_type + " " + esi.access_token;
-};
+const esiApi = require("../../esi/esi-assets");
 
 const getAssets = (req, res) => {
-	const assetsUri = "/" + req.session.character.id + "/assets";
-	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(assetsUri, {
-		headers: {
-			"Authorization": authHeader
-		}
-	})
+	esiApi.fetchAssets(req.session.character.id, req.session.esi)
 	.then(esiRes => {
 		console.log("assets res.data", esiRes.data);
 		if (esiRes.status === 200) {

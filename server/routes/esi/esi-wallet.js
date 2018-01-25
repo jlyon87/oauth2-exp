@@ -1,25 +1,9 @@
 const router = require("express").Router();
-const axios = require("axios");
-const esiChar = axios.create({
-	baseURL: "https://esi.tech.ccp.is/latest/characters",
-	headers: {
-		"X-User-Agent": "eve-companion.in"
-	}
-});
-
-const getAuthHeader = esi => {
-	return esi.token_type + " " + esi.access_token;
-};
+const esiApi = require("../../esi/esi-wallet");
 
 const getCharacterWallet = (req, res) => {
-	const uri = "/" + req.session.character.id + "/wallet";
-	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(uri, {
-		headers: {
-			"Authorization": authHeader
-		}
-	})
+	esiApi.fetchWallet(req.session.character.id, req.session.esi)
 	.then(esiRes => {
 		console.log("wallet res.data", esiRes.data);
 		if (esiRes.status === 200) {
@@ -33,14 +17,8 @@ const getCharacterWallet = (req, res) => {
 };
 
 const getCharacterJournal = (req, res) => {
-	const uri = "/" + req.session.character.id + "/wallet/journal";
-	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(uri, {
-		headers: {
-			"Authorization": authHeader
-		}
-	})
+	esiApi.fetchJournal(req.session.character.id, req.session.esi)
 	.then(esiRes => {
 		console.log("journal res.data", esiRes.data);
 		if (esiRes.status === 200) {
@@ -54,14 +32,8 @@ const getCharacterJournal = (req, res) => {
 };
 
 const getCharacterTransactions = (req, res) => {
-	const uri = "/" + req.session.character.id + "/wallet/transactions";
-	const authHeader = getAuthHeader(req.session.esi);
 
-	esiChar.get(uri, {
-		headers: {
-			"Authorization": authHeader
-		}
-	})
+	esiApi.fetchTransactions(req.session.character.id, req.session.esi)
 	.then(esiRes => {
 		console.log("transactions res.data", esiRes.data);
 		if (esiRes.status === 200) {
