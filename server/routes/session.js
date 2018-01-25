@@ -7,8 +7,6 @@ const ONE_HOUR = TEN_MINUTES * 6;
 const SECRET = process.env.EXPRESS_SESSION_SECRET || "oauth-test";
 
 const pageCounter = (req, res, next) => {
-	console.log("req.session", req.session);
-	console.log("req.sessionID", req.sessionID);
 	if (!req.session.views) {
 		req.session.views = {};
 	}
