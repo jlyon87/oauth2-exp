@@ -12,12 +12,6 @@ const calcExpiryTime = (secondsFromNow) => {
 
 const accessTokenIsValid = (req, res, next) => {
 
-	if(true) {
-		console.log("before next");
-		next();
-	}
-	console.log("after next");
-
 	if(req.session.esi) {
 		console.log("esi expiry - type: " + typeof req.session.esi.expiryTime, req.session.esi.expiryTime);
 
