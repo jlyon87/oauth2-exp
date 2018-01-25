@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const esiAuthApi = require("../../esi/esi-auth");
 const esiAuth = require("./esi-auth");
 const esiAssets = require("./esi-assets");
 const esiCharacter = require("./esi-character");
@@ -14,7 +15,25 @@ const accessTokenIsValid = (req, res, next) => {
 
 		if(msRemaining <= 60000) {
 			console.log("Remaining time low go get a new access token", msRemaining);
-			next(new Error("Access Token Expired."));
+
+			esiAuthApi.refreshAccess(req.session.esi.refresh_token)
+				.then(esiRes => {
+					if(esiRes.status === 200 && esiRes.statusText === "OK") {
+						console.log("Access Token successfully refreshed.");
+						req.session.esi = esiRes.data;
+						const expiry = calcExpiryTime(90000);
+						console.log("set expiry: " + typeof expiry, expiry);
+						req.session.esi.expiry = expiry;
+						return req.session.esi;
+						next();
+					} else {
+						throw new Error("Error requesting access token.");
+					}
+				})
+				.catch(err => {
+					console.error(err);
+					res.redirect("/");
+				});
 		}
 	}
 	next();

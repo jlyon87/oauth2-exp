@@ -1,4 +1,5 @@
 const axios = require("axios");
+const creds = require("./esi-config");
 const esiInstance = axios.create({
 	baseURL: "https://login.eveonline.com/oauth"
 });
@@ -7,7 +8,7 @@ const buildAuthorizationHeader = (clientId, secretKey) => {
 	return "Basic " + new Buffer(clientId + ":" + secretKey).toString("base64");
 };
 
-const requestAuthorizationGrant = (res, creds) => {
+const requestAuthorizationGrant = res => {
 	const params = [
 		"response_type=code",
 		"redirect_uri=" + creds.callbackUrl,
@@ -19,14 +20,14 @@ const requestAuthorizationGrant = (res, creds) => {
 	res.redirect(esiInstance.defaults.baseURL + "/authorize?" + params.join("&"));
 };
 
-const handleAuthorizationCode = (req, state) => {
-	if (req.query.state === state) {
+const handleAuthorizationCode = req => {
+	if (req.query.state === creds.state) {
 		return req.query.code;
 	}
 	throw new Error("Possible XSRF. Invalid state");
 };
 
-const requestAccessToken = (creds, authCode) => {
+const requestAccessToken = authCode => {
 	const authHeader = buildAuthorizationHeader(creds.clientId, creds.secretKey);
 	const params = [
 		"grant_type=authorization_code",
@@ -46,15 +47,37 @@ const requestAccessToken = (creds, authCode) => {
 };
 
 const getCharacterData = oauth => {
-	const authorizationHeader = oauth.token_type + " " + oauth.access_token;
+	const authHeader = oauth.token_type + " " + oauth.access_token;
 	return esiInstance({
 		method: "GET",
 		url: "/verify",
 		headers: {
 			"User-Agent": "eve-companion.in",
-			"Authorization": authorizationHeader,
+			"Authorization": authHeader,
 			"Host": "login.eveonline.com"
 		}
+	});
+};
+
+const refreshAccess = refreshToken => {
+	const authHeader = buildAuthorizationHeader(creds.clientId, creds.secretKey)
+
+	const params = [
+		"grant_type=refreshToken",
+		"refresh_token=" refreshToken
+	];
+
+	const headers = {
+		"Authorization": authHeader,
+		"Content-Type": "application/x-www-form-urlencoded",
+		"Host": "login.eveonline.com"
+	};
+
+	return esiInstance({
+		method: "POST",
+		url: "/token?" + params.join("&"),
+		headers,
+		data: {}
 	});
 };
 
