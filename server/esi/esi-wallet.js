@@ -12,7 +12,7 @@ const fetchWallet = (characterId, clientCreds) => {
 	const uri = "/" + characterId + "/wallet";
 	const authHeader = getBearerAuthorization(clientCreds);
 
-	axiosInstance.get(uri, {
+	return axiosInstance.get(uri, {
 		headers: {
 			"Authorization": authHeader
 		}
@@ -23,7 +23,7 @@ const fetchJournal = (characterId, clientCreds) => {
 	const uri = "/" + characterId + "/wallet";
 	const authHeader = getBearerAuthorization(clientCreds);
 
-	axiosInstance.get(uri, {
+	return axiosInstance.get(uri, {
 		headers: {
 			"Authorization": authHeader
 		}
@@ -34,7 +34,7 @@ const fetchTransactions = (characterId, clientCreds) => {
 	const uri = "/" + characterId + "/wallet";
 	const authHeader = getBearerAuthorization(clientCreds);
 
-	axiosInstance.get(uri, {
+	return axiosInstance.get(uri, {
 		headers: {
 			"Authorization": authHeader
 		}
