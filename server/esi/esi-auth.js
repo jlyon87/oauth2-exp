@@ -4,7 +4,7 @@ const esiInstance = axios.create({
 	baseURL: "https://login.eveonline.com/oauth"
 });
 
-const buildAuthorizationHeader = (clientId, secretKey) => {
+const buildBasicAuthHeader = (clientId, secretKey) => {
 	return "Basic " + new Buffer(clientId + ":" + secretKey).toString("base64");
 };
 
@@ -28,7 +28,7 @@ const handleAuthorizationCode = req => {
 };
 
 const requestAccessToken = authCode => {
-	const authHeader = buildAuthorizationHeader(creds.clientId, creds.secretKey);
+	const authHeader = buildBasicAuthHeader(creds.clientId, creds.secretKey);
 	const params = [
 		"grant_type=authorization_code",
 		"code=" + authCode
@@ -60,7 +60,7 @@ const getCharacterData = oauth => {
 };
 
 const refreshAccess = refreshToken => {
-	const authHeader = buildAuthorizationHeader(creds.clientId, creds.secretKey)
+	const authHeader = buildBasicAuthHeader(creds.clientId, creds.secretKey)
 
 	const params = [
 		"grant_type=refresh_token",
