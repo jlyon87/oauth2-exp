@@ -20,7 +20,7 @@ const fetchWallet = (characterId, clientCreds) => {
 };
 
 const fetchJournal = (characterId, clientCreds) => {
-	const uri = "/" + characterId + "/wallet";
+	const uri = "/" + characterId + "/wallet/journal";
 	const authHeader = getBearerAuthorization(clientCreds);
 
 	return axiosInstance.get(uri, {
@@ -31,7 +31,7 @@ const fetchJournal = (characterId, clientCreds) => {
 };
 
 const fetchTransactions = (characterId, clientCreds) => {
-	const uri = "/" + characterId + "/wallet";
+	const uri = "/" + characterId + "/wallet/transactions";
 	const authHeader = getBearerAuthorization(clientCreds);
 
 	return axiosInstance.get(uri, {
