@@ -36,7 +36,7 @@ const accessTokenIsValid = (req, res, next) => {
 				})
 				.catch(err => {
 					console.error(err);
-					res.redirect("/");
+					next(err);
 				});
 		}
 	}
