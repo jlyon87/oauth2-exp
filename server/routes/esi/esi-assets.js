@@ -12,11 +12,6 @@ const getAuthHeader = esi => {
 };
 
 const getAssets = (req, res) => {
-	//		esiChar.get("/characters/" + 92985127)
-	console.log("getting assets", req.sessionID);
-	console.log("req.session.esi", req.session.esi);
-	console.log("req.session.character", req.session.character);
-
 	const assetsUri = "/" + req.session.character.id + "/assets";
 	const authHeader = getAuthHeader(req.session.esi);
 

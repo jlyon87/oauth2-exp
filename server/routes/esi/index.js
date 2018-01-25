@@ -14,6 +14,7 @@ const accessTokenIsValid = (req, res, next) => {
 
 		if(msRemaining <= 60000) {
 			console.log("Remaining time low go get a new access token", msRemaining);
+			next(new Error("Access Token Expired."));
 		}
 	}
 	next();
