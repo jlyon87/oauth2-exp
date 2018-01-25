@@ -85,5 +85,6 @@ module.exports = {
 	requestAuthorizationGrant,
 	handleAuthorizationCode,
 	requestAccessToken,
-	getCharacterData
+	getCharacterData,
+	refreshAccess
 };
