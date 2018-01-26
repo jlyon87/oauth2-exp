@@ -8,12 +8,16 @@ const esiApi = require("../../esi/esi-auth");
 
 const accessTokenIsValid = (req, res, next) => {
 	console.log("*** confirming token validity ***");
-	if(req.session.esi) {
-		console.log("*** has session.esi ***");
+
+	if(!req.session.esi) {
+		res.status(403).send("Invalid access");
+	} else {
 
 		const msRemaining = calcRemainingTime(new Date(req.session.esi.expiryTime));
 
-		if(msRemaining <= 60000) {
+		if(msRemaining > 60000) {
+			next();
+		} else {
 
 			esiApi.refreshAccess(req.session.esi.refresh_token)
 			.then(esiRes => {
@@ -29,15 +33,10 @@ const accessTokenIsValid = (req, res, next) => {
 			})
 			.catch(err => {
 				console.error(err);
-				next(err);
+				res.status(500).send(err.message);
 			});
 
-		} else {
-			next();
 		}
-
-	} else {
-		res.sendStatus(403);
 	}
 };
 
