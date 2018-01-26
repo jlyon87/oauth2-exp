@@ -3,7 +3,15 @@ var App = (function App(App) {
 
 	var createXMLHttpRequest = function(method, url, listener) {
 		var xhttp = new XMLHttpRequest();
-		xhttp.addEventListener("load", listener);
+		xhttp.addEventListener("load", function() {
+			var res = this;
+			if(res.status === 200) {
+				var data = JSON.parse(res.responseText);
+				listener(data);
+			} else {
+				console.error(res.status, res.responseText);
+			}
+		});
 		xhttp.open(method, url);
 		return xhttp;
 	};
@@ -87,8 +95,7 @@ var App = (function App(App) {
 	};
 
 	var getPublicData = function() {
-		var xhttp = createXMLHttpRequest("GET", "/esi/character", function() {
-			var data = JSON.parse(this.responseText);
+		var xhttp = createXMLHttpRequest("GET", "/esi/character", function(data) {
 			console.log("character", data);
 			drawCharacterData(data);
 		});
@@ -96,8 +103,7 @@ var App = (function App(App) {
 	}
 
 	var getAssets = function() {
-		var xhttp = createXMLHttpRequest("GET", "/esi/assets", function() {
-			var data = JSON.parse(this.responseText);
+		var xhttp = createXMLHttpRequest("GET", "/esi/assets", function(data) {
 			console.log("assets", data);
 			drawAssets(data);
 		});
@@ -105,24 +111,21 @@ var App = (function App(App) {
 	};
 
 	var getWallet = function() {
-		var xhttp = createXMLHttpRequest("GET", "/esi/wallet", function () {
-			var data = JSON.parse(this.responseText);
+		var xhttp = createXMLHttpRequest("GET", "/esi/wallet", function (data) {
 			console.log("wallet", data);
 		});
 		xhttp.send();
 	};
 
 	var getJournal = function () {
-		var xhttp = createXMLHttpRequest("GET", "/esi/wallet/journal", function () {
-			var data = JSON.parse(this.responseText);
+		var xhttp = createXMLHttpRequest("GET", "/esi/wallet/journal", function (data) {
 			console.log("journal", data);
 		});
 		xhttp.send();
 	};
 
 	var getTransactions = function () {
-		var xhttp = createXMLHttpRequest("GET", "/esi/wallet/transactions", function () {
-			var data = JSON.parse(this.responseText);
+		var xhttp = createXMLHttpRequest("GET", "/esi/wallet/transactions", function (data) {
 			console.log("transactions", data);
 		});
 		xhttp.send();
