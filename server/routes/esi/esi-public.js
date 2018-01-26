@@ -1,8 +1,15 @@
 const router = require("express").Router();
-const esiAuth = require("./esi-auth");
 const esiCharacter = require("./esi-character");
 
-router.use("/auth", esiAuth);
+const hasCharacter = (req, res, next) => {
+	if(req.session.character) {
+		next()
+	} else {
+		res.sendStatus(404);
+	}
+};
+
+router.use(hasCharacter);
 router.use("/character", esiCharacter);
 
 module.exports = router;
