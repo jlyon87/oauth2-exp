@@ -37,7 +37,7 @@ const accessTokenIsValid = (req, res, next) => {
 		}
 
 	} else {
-		next();
+		res.sendStatus(403);
 	}
 };
 
