@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-const esiAssets = require("./esi-assets");
-const esiWallet = require("./esi-wallet");
+const esiAssets = require("./routes/esi-assets");
+const esiWallet = require("./routes/esi-wallet");
 
 const { addSeconds, calcRemainingTime } = require("../../plugins/date-helper");
 const esiApi = require("../../esi/esi-auth");

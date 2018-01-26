@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const esiApi = require("../../esi/esi-wallet");
+const esiApi = require("../../../esi/esi-wallet");
 
 const getCharacterWallet = (req, res) => {
 

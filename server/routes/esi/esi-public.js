@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const esiCharacter = require("./esi-character");
+const esiCharacter = require("./routes/esi-character");
 
 const hasCharacter = (req, res, next) => {
 	if(req.session.character) {

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const esiApi = require("../../esi/esi-assets");
+const esiApi = require("../../../esi/esi-assets");
 
 const getAssets = (req, res) => {
 
