@@ -8,7 +8,7 @@ const getPublicData = (req, res) => {
 	if (req.session.character) {
 		res.send(req.session.character);
 	} else {
-		res.sendStatus(404);
+		res.status(404).send("No Character Found.");
 	}
 };
 
