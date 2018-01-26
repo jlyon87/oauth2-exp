@@ -9,7 +9,7 @@ var App = (function App(App) {
 				var data = JSON.parse(res.responseText);
 				listener(data);
 			} else {
-				console.error(res.status, res.responseText);
+				console.error(res.status, res);
 			}
 		});
 		xhttp.open(method, url);
