@@ -4,7 +4,7 @@ const { getBearerAuthorization } = require("../plugins/auth-header");
 const axiosInstance = axios.create({
 	baseURL: "https://esi.tech.ccp.is/latest/characters",
 	headers: {
-		"X-User-Agent": "eve-companion.in"
+		"User-Agent": "eve-companion.in / v1.0"
 	}
 });
 
