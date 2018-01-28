@@ -1,7 +1,11 @@
 const axios = require("axios");
 const creds = require("./esi-config");
 const esiInstance = axios.create({
-	baseURL: "https://login.eveonline.com/oauth"
+	baseURL: "https://login.eveonline.com/oauth",
+	headers: {
+		"Host": "login.eveonline.com",
+		"User-Agent": "eve-companion.in / v1.0"
+	}
 });
 
 const { getBasicAuthorization } = require("../plugins/auth-header");
@@ -38,7 +42,6 @@ const requestAccessToken = authCode => {
 		headers: {
 			"Authorization": authHeader,
 			"Content-Type": "application/x-www-form-urlencoded",
-			"Host": "login.eveonline.com"
 		},
 		data: {}
 	});
@@ -52,7 +55,6 @@ const getCharacterData = oauth => {
 		headers: {
 			"User-Agent": "eve-companion.in",
 			"Authorization": authHeader,
-			"Host": "login.eveonline.com"
 		}
 	});
 };
@@ -68,7 +70,6 @@ const refreshAccess = refreshToken => {
 	const headers = {
 		"Authorization": authHeader,
 		"Content-Type": "application/x-www-form-urlencoded",
-		"Host": "login.eveonline.com"
 	};
 
 	return esiInstance({
