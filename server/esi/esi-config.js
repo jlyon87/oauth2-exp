@@ -1,4 +1,4 @@
-const scopes = process.env.ESI_SCOPES.split(" ").join("%20");
+const scopes = process.env.ESI_SCOPES ? process.env.ESI_SCOPES.split(" ").join("%20") : ""
 
 const creds = {
 	clientId: process.env.ESI_CLIENT_ID,
